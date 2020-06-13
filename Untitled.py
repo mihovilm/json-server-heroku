@@ -5,20 +5,29 @@ f = open('olddb.json',)
 data = json.load(f)
 
 new = {"internet":[], "velocity":[], "searchVirality":[], "demographic":[], "emerging":[]}
-seen = []
+seenTracks = {"internet":[], "velocity":[], "searchVirality":[], "demographic":[], "emerging":[]}
 
 for obj in data:
     if (obj["type"] == "Demographic"):
-        new["demographic"].append(obj)
+        if (obj["track_name"] not in seenTracks["demographic"]):
+            new["demographic"].append(obj)
+            seenTracks["demographic"].append(obj["track_name"])
     elif (obj["type"] == "Velocity"):
-        new["velocity"].append(obj)
+        if (obj["track_name"] not in seenTracks["velocity"]):
+            new["velocity"].append(obj)
+            seenTracks["velocity"].append(obj["track_name"])
     elif (obj["type"] == "Search Virality"):
-        new["searchVirality"].append(obj)
+        if (obj["track_name"] not in seenTracks["searchVirality"]):
+            new["searchVirality"].append(obj)
+            seenTracks["searchVirality"].append(obj["track_name"])
     elif (obj["type"] == "Internet/TikTok"):
-        new["internet"].append(obj)
+        if (obj["track_name"] not in seenTracks["internet"]):
+            new["internet"].append(obj)
+            seenTracks["internet"].append(obj["track_name"])
     elif (obj["type"] == "Emerging Artists"):
-        new["emerging"].append(obj)
-
+        if (obj["track_name"] not in seenTracks["emerging"]):
+            new["emerging"].append(obj)
+            seenTracks["emerging"].append(obj["track_name"])
 
 print(json.dumps(new))
 
