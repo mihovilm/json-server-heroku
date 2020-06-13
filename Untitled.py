@@ -5,6 +5,7 @@ f = open('olddb.json',)
 data = json.load(f)
 
 new = {"internet":[], "velocity":[], "searchVirality":[], "demographic":[], "emerging":[]}
+seen = []
 
 for obj in data:
     if (obj["type"] == "Demographic"):
@@ -17,6 +18,7 @@ for obj in data:
         new["internet"].append(obj)
     elif (obj["type"] == "Emerging Artists"):
         new["emerging"].append(obj)
+
 
 print(json.dumps(new))
 
